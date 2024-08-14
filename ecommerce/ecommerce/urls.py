@@ -20,8 +20,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    # Admin url
     path('admin/', admin.site.urls),
+    
+    # Store url
     path('', include('store.urls')),
     
+    # Cart url
+    path('cart/', include('cart.urls')),    
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

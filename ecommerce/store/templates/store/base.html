@@ -93,7 +93,7 @@
                         {% comment %} all_categories is context_processors check views.py -> category {% endcomment %}
                         {% for category in all_categories %}
                         <li>
-                           <a class="dropdown-item" href=""> {{ category.name | capfirst }} </a>
+                           <a class="dropdown-item" href="{{ category.get_absolute_url }}"> {{ category.name | capfirst }} </a>
                         </li>
                         {% endfor %}
         
