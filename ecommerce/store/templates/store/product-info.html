@@ -98,12 +98,13 @@
 </div>
 
 <script>
+    // Add button in cart
     $(document).on('click', '#add-button', function(e) {
         e.preventDefault();
 
         $.ajax({
             type: 'POST',
-            url: '{% url 'cart-add' %}',
+            url: '{% url "cart-add" %}',
             data: {
                 product_id: $('#add-button').val(),
                 product_quantity: $('#select option:selected').text(),
