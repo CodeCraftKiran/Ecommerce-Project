@@ -5,9 +5,16 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+
+<style>
+    body {
+        background-color: grey;
+    }
+</style>
+
     <body>
         <br>
-        <div class='container bg-white shadow-md p-5'>
+        <div class='container bg-white shadow-md p-5 form-layout'>
             <h3>Create your account</h3>
             <h5>Purchase your favourite item today!</h5>
             <br>
@@ -17,19 +24,21 @@
                 {% csrf_token %}
 
                 {{ form.username|as_crispy_field }}
+                <br><br>
                 {{ form.email|as_crispy_field }}
+                <br><br>
                 {{ form.password1|as_crispy_field }}
+                <br>
                 {{ form.password2|as_crispy_field }}
+                <br><br>
 
-                <br>
-                <br>
                 <button type="submit" class="btn btn-secondary btn-lg w-100 btn-block p-2">
                     &nbsp; Create Account
                 </button>
             </form>
 
-
         </div>
+        <br><br>
     </body>
 
 
