@@ -17,7 +17,7 @@ from django.contrib.auth.decorators import login_required
 
 from django.contrib import messages
 
-from payment.forms import shippingForm
+from payment.forms import ShippingForm
 from payment.models import ShippingAddress
 
 # Create your views here.
@@ -162,17 +162,20 @@ def manage_shipping(request):
         # Account user with no shipment information
         shipping = None
     
-    form = shippingForm(instance=shipping)
+    form = ShippingForm(instance=shipping)
     
-    if form.is_valid():
-        # Assign the user FK on the object
-        shipping_user = form.save(commit=False)
-        
-        # Adding the FK itself
-        shipping_user.user = request.user
-        shipping_user.save()
-        
-        return redirect('dashboard')
+    if request.method == 'POST':
+        form = ShippingForm(request.POST, instance=shipping)
+    
+        if form.is_valid():
+            # Assign the user FK on the object
+            shipping_user = form.save(commit=False)
+            
+            # Adding the FK itself
+            shipping_user.user = request.user
+            shipping_user.save()
+            
+            return redirect('dashboard')
     
     context = {'form':form}
-    return render(request, 'account/manage-shipping.html')
+    return render(request, 'account/manage-shipping.html', context)
