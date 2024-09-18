@@ -18,7 +18,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 from payment.forms import ShippingForm
-from payment.models import ShippingAddress
+from payment.models import ShippingAddress, Order, OrderItem
 
 # Create your views here.
 def register(request):
@@ -179,3 +179,17 @@ def manage_shipping(request):
     
     context = {'form':form}
     return render(request, 'account/manage-shipping.html', context)
+
+
+@login_required(login_url='my-login')
+def track_orders(request):
+    
+    try:
+        orders = OrderItem.objects.filter(user=request.user)
+        context = {'orders': orders}
+        return render(request, 'account/track-order.html', context)
+    
+    except:
+        
+        return render(request, 'account/track-order.html')
+        
